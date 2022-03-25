@@ -1,8 +1,5 @@
 # EnzymeMatch
 
-Match enzymes by binding site search.
-
-    EnzymeMatch
     Copyright (C) 2022  Okke Melse
 
     This program is free software: you can redistribute it and/or modify
@@ -17,3 +14,10 @@ Match enzymes by binding site search.
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    
+**Modes:**
+
+- CompleteMatch: Complete run of EnzymeMatch, consecutively conducting AQD, ResidueMatch and TriangleMatch.
+- Automatic Query Design (AQD): Stand-alone Automatic Query Design mode, i.e. automatic input generation for ResidueMatch and TriangleMatch based on input of substrate (.mol2 and .sdf supported).
+- ResidueMatch: Match enzymes from BioLiP database containing complement residue types with respect to the target substrate.
+- TriangleMatch: Geometrical match of interaction point pattern between enzyme and substrate. This mode should ideally run on the output of ResidueMatch.
