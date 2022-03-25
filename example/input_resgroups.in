@@ -1,0 +1,9 @@
+>H_don: R,H,K,S,T,N,Q,C,U,P,W,Y
+>H_acc: R,H,K,D,E,S,T,N,Q,C,U,P,M,Y,W ; W at N in ring
+>pos_charged: R,H,K
+>neg_charged: D,E
+>hydrophobic: M,A,I,L,V,Y,F,W
+>tiny: G,A
+>small: S,C,D,P,N,T,E,V,Q,H
+>bulky: M,I,L,K,R,F,Y,W
+>aromatic: Y,W,F,H

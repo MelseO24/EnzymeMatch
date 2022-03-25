@@ -1,0 +1,33 @@
+mode: complete
+>ResidueGroup_input: example/input_resgroups.in ;Self-defined residuegroups, can be ignored when defaults are used
+>DBfile: ../BioLipDB_short_example.txt     ;BioLip database
+>interactionpoints_num: 4                  ;maximum number of interactions could be matched
+>min_interactionpoints_num: 3		       ;minimum number of interactions need to be matched
+>MR_outdir: Results                        ;directory where to store MR output files
+>MR_summaryfile: MR.summary 			   ;filename of MR summary output
+>MR_bis_outfile: MR_BiS.out 			   ;filename of MR Binding Site output
+>MR_cat_outfile: MR_Cat.out 			   ;filename of MR Catalytic Site output
+>MT_Receptor_folder_path: ../receptor_nr/  ;Path to the folder containing the receptor PDB files
+>MT_Ligand_folder_path: ../ligand_nr/      ;Path to the folder containing the ligand PDB files
+>MT_outfile: MT.out	                	   ;filename of MT output
+>MT_summaryfile: MT.summary			       ;filename of MT summary output
+>MT_AQD_ligand_input: ../DEX_ideal.sdf        ;(in .mol2 or .sdf format) if provided, automatically switches
+                                           ;on automatic binding site query design based on conf. search
+                                           ;of provided ligand. Cannot be combined with ">distances" input.
+>MT_AQD_ligand_inputformat: sdf            ;[mol2, sdf] Note: only mol2 format with CORINA atomtypes are supported, as
+						                   ;TRIPOS atomtypes are only marginally tested.
+>MT_AQD_atomids: 24,25,26,27               ;atomIDs from ligand given in ">MT_AQD_ligand_input"
+>MT_AQD_types: H_acc,H_don,H_don,H_acc     ;interaction type of LIGAND atoms, in same order as provided in ">MT_AQD_ligand_inputformat"
+>MT_AQD_conf_num: 200                      ;Number of ligand conformations to generate, in order to predict query.
+>MT_AQD_offsetfactor: 2	               ;This offset factor will be multiplied with the allowed offsets resulting from AQD
+;>MT_AQD_min_offset: 			           ;Minimal offset value
+>MT_scoring: 1                             ;Use scoring function: 0=ff, 1=on
+>MT_download_mode: 0                       ;Use download mode: 0=ff, 1=on
+>backbone_interaction: 0                   ;Consider backbone interactions: 0=ff, 1=on
+>MT_accurate_mode: 0                       ;Use accurate mode: 0=ff, 1=on
+>MT_numprocs: 1                            ;Number of CPU processors (cores) to use
+>MC_MatchSide: Cat                         ;BiS: use binding site resides, Cat: use catalytic residues
+>verbosity: 1	           		           ;1: only print most essential warnings
+                        		           ;2: print all warnings (including non-resolved residues warnings)
+>strict_mode: 0 		   		           ;When switched on, terminate execution when ligand or receptor file not found: 0=ff, 1=on
+>debug: 0             				       ;0=off, 1=on
