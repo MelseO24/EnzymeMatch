@@ -177,7 +177,6 @@ def raiseError(message, StrictMode):
     sys.stderr.write(message)
     if StrictMode:
         exit(1)
-    #TODO: kill all processes when in multiprocessing mode!
 
 
 # Utilities for Input parsing

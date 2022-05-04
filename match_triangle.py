@@ -662,7 +662,7 @@ def getResDistance(res1, res2, pdb_protein, chain, entry, accurate):
             return inf
 
     if not accurate:
-        # Calls the Atom Object  #TODO: Perhaps if time, consider midpoint always for aromatic rings, and consider other Central atom for example Tyrosine when H-acc is used instead of aromatic
+        # Calls the Atom Object
         atom1 = pdb_protein[0][chain][(" ", residue1_nr, insertion1)][res_pos1[1]]
         atom2 = pdb_protein[0][chain][(" ", residue2_nr, insertion2)][res_pos2[1]]
         #if globalParameters.debug > 0:
