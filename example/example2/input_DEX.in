@@ -26,7 +26,7 @@ mode: complete
 >backbone_interaction: 0                   ;Consider backbone interactions: 0=ff, 1=on
 >MT_accurate_mode: 0                       ;Use accurate mode: 0=ff, 1=on
 >MT_numprocs: 1                            ;Number of CPU processors (cores) to use
->MC_MatchSide: Cat                         ;BiS: use binding site resides, Cat: use catalytic residues
+>MT_MatchSite: Cat                         ;BiS: use binding site resides, Cat: use catalytic residues
 >verbosity: 1	           		           ;1: only print most essential warnings
                         		           ;2: print all warnings (including non-resolved residues warnings)
 >strict_mode: 0 		   		           ;When switched on, terminate execution when ligand or receptor file not found: 0=ff, 1=on

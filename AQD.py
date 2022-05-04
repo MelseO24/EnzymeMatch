@@ -65,7 +65,7 @@ def runAQDstandalone(parm_triangle, parm_general):
     parm_triangle.auto_query_min_offset = None
     try:
         import pickle
-        with open("AQDoutput.pickle", "wb") as pickleFile:
+        with open(os.path.join(utils.utilities.globalParameters.workdir, "AQDoutput.pickle"), "wb") as pickleFile:
             pickle.dump([parm_general, parm_triangle], pickleFile)
         fout.write("TriangleMatching parameters as well as general parameters saved as pickle to: AQDoutput.pickle\n")
     except:

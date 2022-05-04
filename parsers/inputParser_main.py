@@ -155,13 +155,14 @@ def parseParameter(filepath):
          # the output of the MatchResidue consists of a Bis file and a Cat file.
          # The file used for MatchTriangle is determined by the parameter MatchFile in general param
          if input_triangle.input is None:
-             if input_general.MatchSide == "bis":
+             if input_triangle.match_side == "bis":
                 input_triangle.setInputPath(os.path.join(input_residue.MR_directory_out, input_residue.BiSOut))
-             elif input_general.MatchSide == "cat":
+             elif input_triangle.match_side == "cat":
                 input_triangle.setInputPath(os.path.join(input_residue.MR_directory_out, input_residue.CatOut))
                 input_triangle.setMatchSide("cat")
              else:
-                 raiseError(f"FATAL: Unknown error on choosing MatchSide\n", True)
+                 raiseError(f"FATAL: MatchSite could not be set properly, please provide a valid argument "
+                            f"(i.e. 'bis' or 'cat') for the 'MT_MatchSite' keyword in the input file.\n", True)
          else:
              raiseError("FATAL: Illegal input: Parameter >MT_input not needed in complete mode.\n", True)
 

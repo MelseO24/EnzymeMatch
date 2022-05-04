@@ -43,7 +43,6 @@ switcher_errormsg = {
     "strict_mode": ">strict_mode",
     "backbone_interaction": ">backbone_interaction",
     "min_num_of_interaction_points":">min_interactionpoints_num",
-    "MatchSide":">MC_MatchSide",
 
     # residue matching
     "DBfile": ">DBfile",
@@ -77,7 +76,7 @@ switcher_errormsg = {
     "backbone_penalty":">MT_backbone_penalty",
     "auto_query_min_offset":">MT_AQD_min_offset",
     "accurate_mode":">MT_accurate_mode",
-    "match_side":">MT_MatchSide",
+    "match_side":">MT_MatchSite",
     "numprocs":">MT_numprocs"
 }
 
@@ -109,7 +108,6 @@ def parseGeneral(parser_object, options, only_return_options=False):
         ">strict_mode": parser_object.setStrictMode,
         ">backbone_interaction":parser_object.setBackboneInteraction,
         "Aminoacids_OrigInput": parser_object.setAminoacidInputs,
-        ">MC_MatchSide":parser_object.setMatchSide
     }
     if only_return_options:
         return switcher_general.keys()
@@ -180,7 +178,7 @@ def parseTriangle(parser_object, options, only_return_options=False):
         ">min_interactionpoints_num":parser_object.minNumInteractionPoints,
         ">MT_AQD_min_offset":parser_object.setAQDMinOffset,
         ">MT_accurate_mode":parser_object.setAccPosMode,
-        ">MT_MatchSide":parser_object.setMatchSide,
+        ">MT_MatchSite":parser_object.setMatchSide,
         ">MT_numprocs":parser_object.setNrProcs
     }
     if only_return_options:
@@ -229,10 +227,6 @@ class MatchGlobalParameter:
         self.verbosity = 1
         self.backbone_interaction = None
         self.aminoacid_inputs= []
-        self.MatchSide = None
-
-    def setMatchSide(self, param):
-        self.MatchSide = param.lower()
 
     def setAminoacidInputs(self, aminoAcid):
         if isinstance(aminoAcid, list):
@@ -329,25 +323,8 @@ class MatchGlobalParameter:
         # check for unset variables
         errors = []
         for key in vars(self).keys():
-            if key == "MatchSide":
-                continue
             if (vars(self)[key] is None) or (vars(self)[key] == []):
                 errors.append(key)
-
-
-        # MatchSide type can only be given when the complete mode is turned on,
-        # because in MatchResidue, we trivially don't need any input files
-        # and in MatchTriangle, the input file has to be specified anyway.
-        if utils.globalParameters.complete_mode and self.MatchSide is None:
-            raiseError(f"FATAL: {switcher_errormsg['MatchSide']} has to be given in complete Mode\n"
-                          f"Available options: bis, cat\n", True)
-        elif not utils.globalParameters.complete_mode and self.MatchSide is not None:
-            raiseError(f"FATAL: {switcher_errormsg['MatchSide']} cannot be given when not in complete Mode\n", True)
-
-        if utils.globalParameters.complete_mode:
-            if self.MatchSide not in ['cat', 'bis']:
-                raiseError(f"FATAL: {switcher_errormsg['MatchSide']} is invalid\n"
-                          f"Available options: bis, cat\n", True)
 
         if not errors == []:
             if not (("allowed_residues" in errors) and parm_triangle.auto_query_input):
@@ -476,7 +453,7 @@ class MatchResidueParameter:
         if not self.number_of_interaction_points == len(parm_general.allowed_residues):
             # number_of_interaction_points not requried if matchcomplete runs with AQD
             if not (matchcomplete and parm_triangle.auto_query_input):
-                raiseError("FATAL: Illegal input: The amount of '>Aminoacids' entries does not match '>interaction points'.\n", True)
+                raiseError("FATAL: Illegal input: The amount of '>Aminoacids' entries does not match '>interactionpoints_num'.\n", True)
 
 class MatchTriangleParameter:
 
@@ -520,7 +497,7 @@ class MatchTriangleParameter:
         self.backbone_penalty = 0.0
         self.min_num_of_interaction_points = None
         self.accurate_mode = 0
-        self.match_side = "bis"
+        self.match_side = None
         self.numprocs = os.cpu_count()
 
     def __str__(self):
@@ -815,10 +792,10 @@ class MatchTriangleParameter:
                 f"FATAL: {switcher_errormsg['download_mode']} only takes 0 (off), 1 (on) as argument\n", True)
 
     def setMatchSide(self, side):
-        if side in ["bis", "cat"]:
-            self.match_side = side
+        if side.lower() in ["bis", "cat"]:
+            self.match_side = side.lower()
         else:
-            raiseError("Illegal input: >MatchSide only accepts the following keywords: 'bis', 'cat'\n", True)
+            raiseError("Illegal input: >MT_MatchSite only accepts the following keywords: 'bis', 'cat'\n", True)
 
     def setNrProcs(self, procs):
         try:

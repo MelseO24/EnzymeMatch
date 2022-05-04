@@ -75,9 +75,6 @@ def isDoubleBoundHeavyAtom(atom):
                 and atom.GetBonds()[0].GetBondType() == Chem.rdchem.BondType.DOUBLE \
                 and atom.GetNeighbors()[0].GetAtomicNum() == 6:
             return True
-        #if {atom.GetIdx(), atom.GetNeighbors()[0].GetIdx()} in \
-        #        [set(x) for x in atom.GetOwningMol().GetSubstructMatches(fg_carbonyl)]:  # sets since they are unordered
-        #    return True
         if {atom.GetIdx(), atom.GetNeighbors()[0].GetIdx()} in \
                 [set(x) for x in atom.GetOwningMol().GetSubstructMatches(fg_phoshponyl)]:  # sets since they are unordered
             return True

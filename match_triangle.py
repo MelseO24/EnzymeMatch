@@ -336,11 +336,11 @@ def get_protein_structure(ligand_path, receptor_path, parm_triangle, entry, pdbD
                     # filtering out the residue in order to check for its size
                     Wanted_Residue = None
                     # Getting the wanted chain
-                    for chains in pdb_protein.get_chains():
-                        if chains.get_id() == entry['protchain']:
-                            receptor_Chain = chains
-                        if chains.get_id() == entry['LigChain']:
-                            ligand_Chain = chains
+                    for chain in pdb_protein.get_chains():
+                        if chain.get_id() == entry['protchain']:
+                            receptor_Chain = chain
+                        if chain.get_id() == entry['LigChain']:
+                            ligand_Chain = chain
                     # break if the wanted chain is not present
                     if receptor_Chain is None:
                         if util.globalParameters.verbosity > 1:
@@ -364,7 +364,7 @@ def get_protein_structure(ligand_path, receptor_path, parm_triangle, entry, pdbD
                         return None
                     # Get the wanted residue
                     for residues in ligand_Chain.get_residues():
-                        if residues.get_resname().strip() == entry['LigID']():
+                        if residues.get_resname().strip() == entry['LigID']:
                             Wanted_Residue = residues
                             break
                     if Wanted_Residue is None:
