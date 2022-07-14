@@ -1,5 +1,6 @@
 biopython==1.76
-numpy==1.18.5
+#numpy==1.18.5
+numpy==1.19.2
 rdkit==2020.03.2.0 #Only in conda rep until python 3.7!
 scipy==1.5.0
 mmtf-python==1.1.2
